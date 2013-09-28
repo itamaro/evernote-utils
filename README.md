@@ -84,12 +84,12 @@ Hit "Tab" and type the name of the new project (which will also be the name of t
 Hie "Enter", and behold the initialized project in the selected stack!
 ![Initialized Evernote project notebook and notes](docs/project-4-Evernote-Notebook.png)
 
-Alternatively, using [AutoHotKey](http://www.autohotkey.com/), you can bind a keyboard shortcut (e.g. "Ctrl+Alt+p", or "^!p") to the ["CreateProject.exe" executable](AHK) (which is a compiled version of the [AutoHotKey script](AHK/CreateProject.ahk) to achieve something similar with AHK instead of Launchy.
+Alternatively, using [AutoHotKey](http://www.autohotkey.com/), you can bind a keyboard shortcut (e.g. "Ctrl+Alt+p", or "^!p") to the ["CreateProject.exe" executable](AHK) (which is a compiled version of the [AutoHotKey script](AHK/CreateProject.ahk)) to achieve something similar with AHK instead of Launchy.
 
 Using the AHK method, you will type the project name in a popup dialog instead of the Launchy dialog:
 ![AHK Project name dialog](docs/project-5-AHK-Dialog.png)
 
-This, ofcourse, requires that AutoHotKey is installed, and a keyboard shortcut is defined like this:
+This, of course, requires that AutoHotKey is installed, and a keyboard shortcut is defined like this:
 
 ```AutoHotkey
 #IfWinActive ahk_class ENMainFrame
@@ -104,20 +104,21 @@ Installation
 
 Requirements:
 
-1. Windows
+1. OS: Windows
 2. Evernote >= 5.0
-3. Python 2.7
+3. [Python 2.7](http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi)
 4. [parsedatetime Python library](https://github.com/bear/parsedatetime)
 5. [Launchy](http://www.launchy.net/) (this probably works with other keyboard launchers, but the details will differ)
+6. Optional: [AutoHotkey](http://www.autohotkey.com/) (needed if you want to change things, or bind custom keyboard shortcuts)
 
 Steps:
 
-1. [Download the package](https://github.com/itamaro/evernote-utils/archive/master.zip) (or [clone it](https://github.com/itamaro/evernote-utils.git)), and save it wherever you'd like on your computer (let's call that <package-dir>).
+1. [Download the package](https://github.com/itamaro/evernote-utils/archive/master.zip) (or [clone it](https://github.com/itamaro/evernote-utils.git)), and save it wherever you like on your computer (let's call that path `<package-dir>`).
 2. Modify the scripts to fit your workflow and system (change default notebooks, tags, action contexts, note templates).
-3. Configure Launchy to index batch script files from the [QuickNotes](QuickNotes) directory under <package-dir>:
+3. Configure Launchy to index batch script files from the [QuickNotes](QuickNotes) directory under `<package-dir>`:
 ![Launchy options](docs/Launchy-configure.png)
 ![Configure Launchy catalog](docs/Launchy-configure-catalog.png)
-4. Click "Rescan Catalog" and "OK" to finish the process
+4. Click "Rescan Catalog" and "OK" to finish the process.
 
 That's it!
 
