@@ -63,3 +63,33 @@ so this is a dependency (install with `pip install parsedatetime`).
 Note: The reminder time is calculated based on the current timezone.
 
 In case the script was unable to parse the date, it will not set a reminder, but will prepend the note title with "FIX REMINDER" so you can see it was unable to set a reminder.
+
+
+
+Installation
+------------
+
+Requirements:
+
+1. Windows
+2. Evernote >= 5.0
+3. Python 2.7
+4. [parsedatetime Python library](https://github.com/bear/parsedatetime)
+5. [Launchy](http://www.launchy.net/) (this probably works with other keyboard launchers, but the details will differ)
+
+Steps:
+
+1. [Download the package](https://github.com/itamaro/evernote-utils/archive/master.zip) (or [clone it](https://github.com/itamaro/evernote-utils.git)), and save it wherever you'd like on your computer (let's call that <package-dir>).
+2. Modify the scripts to fit your workflow and system (change default notebooks, tags, action contexts, note templates).
+3. Configure Launchy to index batch script files from the [QuickNotes](QuickNotes) directory under <package-dir>:
+![Launchy options](docs/Launchy-configure.png)
+![Configure Launchy catalog](docs/Launchy-configure-catalog.png)
+4. Click "Rescan Catalog" and "OK" to finish the process
+
+That's it!
+
+
+
+Customization
+-------------
+TODO
