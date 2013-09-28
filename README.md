@@ -65,6 +65,39 @@ Note: The reminder time is calculated based on the current timezone.
 In case the script was unable to parse the date, it will not set a reminder, but will prepend the note title with "FIX REMINDER" so you can see it was unable to set a reminder.
 
 
+### Initialization of a new project in Evernote with Launchy or using a keyboard shortcut
+
+Automate the process of initializing a new project in Evernote, where "project initialization" in my system includes:
+
+1. Creating a project-specific notebook in a notebook stack.
+2. Creating initial project notes in the new project notebook, based on a template.
+
+Simply highlight in Evernote the target notebook-stack for the new project-notebook:
+![Evernote notebook stack](docs/project-1-Evernote.png)
+
+Call Launchy (Alt+Space) and start typing "enproject":
+![Launchy enproject](docs/project-2-Launchy-enp.png)
+
+Hit "Tab" and type the name of the new project (which will also be the name of the project-specific notebook):
+![Launchy new project](docs/project-3-Launchy-project.png)
+
+Hie "Enter", and behold the initialized project in the selected stack!
+![Initialized Evernote project notebook and notes](docs/project-4-Evernote-Notebook.png)
+
+Alternatively, using [AutoHotKey](http://www.autohotkey.com/), you can bind a keyboard shortcut (e.g. "Ctrl+Alt+p", or "^!p") to the ["CreateProject.exe" executable](AHK) (which is a compiled version of the [AutoHotKey script](AHK/CreateProject.ahk) to achieve something similar with AHK instead of Launchy.
+
+Using the AHK method, you will type the project name in a popup dialog instead of the Launchy dialog:
+![AHK Project name dialog](docs/project-5-AHK-Dialog.png)
+
+This, ofcourse, requires that AutoHotKey is installed, and a keyboard shortcut is defined like this:
+
+```AutoHotkey
+#IfWinActive ahk_class ENMainFrame
+	^!p::
+		Run,"<package-dir>\AHK\CreateProject.exe"
+#IfWinActive
+```
+ 
 
 Installation
 ------------
@@ -89,7 +122,7 @@ Steps:
 That's it!
 
 
-
 Customization
 -------------
+
 TODO
