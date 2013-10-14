@@ -36,8 +36,14 @@ By prefixing the note title with `/notebook:Target Notebook Name/` or `/project:
 The note will be created directly in the specified notebook:
 ![Note in Evernote](docs/action-note-5-notebook-overriden.png)
 
-In case such a notebook does not exist, it will be created.
-(note: I plan to implement a different behaviour: the script will try choosing an existing notebook that "looks like" the name specified)
+The script supports "lazy notebook lookup",
+meaning it will try to select a notebook that matches the supplied string exactly,
+but if there's no match, it will also try:
+
+1. A maximal exact partial match: an existing notebook that contains the exact supplied string. if there are several such notebooks, it will select the one with the least unmatched strings before and after the matched string. 
+2. A maximal word-overlap match: an existing notebook that has overlapping words with the supplied string. "words" are splitted on whitespace and "-". repeating words are counted only once. in case of multiple matched notebooks, it will select the one with the largest intersection.
+
+All notebook lookups are case-insensitive.
 
 
 #### Setting a reminder from the title

@@ -1,6 +1,7 @@
 import os
+import re
 from string import Template
-from subprocess import call
+from subprocess import call, Popen, PIPE
 from time import strftime, sleep, gmtime, mktime
 
 from locator import module_path
@@ -163,13 +164,53 @@ def action_note(args):
     # Apply template
     import_file_path = apply_template(args.template, tmpl_params)
     
+    notebook = None
+    if args.notebook:
+        # Get list of notebook by running ENScript listNotebooks
+        # it writes the notebooks the stdout, one per line
+        p = Popen(['ENScript.exe', 'listNotebooks'], stdout=PIPE)
+        notebooks, _ = p.communicate()
+        notebooks = [nb.strip() for nb in notebooks.split('\n')]
+        def get_notebook(query):
+            # Try a best-effort exact match
+            query_matcher = re.compile('(.*)%s(.*)' % (re.escape(query)),
+                                       re.IGNORECASE)
+            min_miss_len = max(map(len, notebooks))
+            notebook = None
+            for nb in notebooks:
+                qm = query_matcher.match(nb)
+                if qm:
+                    miss_len = len(qm.group(1)) + len(qm.group(2))
+                    if 0 == miss_len:
+                        # Perfect match! Return immediately!
+                        return nb
+                    if miss_len < min_miss_len:
+                        min_miss_len = miss_len
+                        notebook = nb
+            # If had any luck, return now
+            if notebook:
+                return notebook
+            # Otherwise, try maximal word-overlap matching
+            def to_words(str):
+                return set(str.lower().replace('-', ' ').split())
+            in_words = to_words(query)
+            max_intersect = 0
+            for nb in notebooks:
+                nb_words = to_words(nb)
+                intersection = len(nb_words.intersection(in_words))
+                if intersection > max_intersect:
+                    max_intersect = intersection
+                    notebook = nb
+            return notebook
+        notebook = get_notebook(args.notebook)
+    
     timestr = strftime('%Y%m%dT%H%M00')
     # Import the note to Evernote
     # (into specific notebook if supplied, or default one otherwise)
     call_args = ['importNotes', '/s', import_file_path]
-    if args.notebook:
+    if notebook:
         call_args.append('/n')
-        call_args.append(args.notebook)
+        call_args.append(notebook)
     call_enscript(call_args)
     
     # Open the note in a separate window after importing (if flagged to do so)
