@@ -1,5 +1,5 @@
 @echo off
 set CURDIR=%CD%
 set NOTETITLE=%*
-python "%CURDIR%\..\PyEvernote\ImportEvernoteTemplate.py" --notebook "${DefaultActionNotebook}" action --context ${ActionContext} --action-title "%NOTETITLE%"
+python "%CURDIR%\..\PyEvernote\ImportEvernoteTemplate.py" --open-note --notebook "${DefaultActionNotebook}" action --context ${ActionContext} --action-title "%NOTETITLE%"
 @echo on
